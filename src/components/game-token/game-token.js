@@ -29,18 +29,25 @@ const Token = (props) => {
     const getDieValue = (dieNumber) => {
         switch (dieNumber) {
             case 4:
+                setCordinateState(16)
                 return 16
             case 26:
+                setCordinateState(55)
                 return 55;
             case 47:
+                setCordinateState(90)
                 return 90
             case 60:
+                setCordinateState(33)
                 return 33
             case 76:
+                setCordinateState(34)
                 return 34
             case 83:
+                setCordinateState(10)
                 return 10
             case 93:
+                setCordinateState(52)
                 return 52
             default:
                 return dieNumber
@@ -50,13 +57,14 @@ const Token = (props) => {
     useEffect(() => {
         ctx = tokenRef.current.getContext("2d")
         ctx.fillRect(currentX, currentY, 50, 50)
-        if(parseInt(props.dieState.dieValue))
-        moveToken(parseInt(props.dieState.dieValue))
+        if(cordinateState)
+        moveToken(cordinateState)
     }, [cordinateState]);
 
     useEffect(()=> {
+        console.log(cordinateState, parseInt(props.dieState.dieValue))
         clearToken(cordinateState);
-        setCordinateState(parseInt(props.dieState.dieValue))
+        setCordinateState( cordinateState + parseInt(props.dieState.dieValue))
     }, [props.dieState])
 
     return <div>
