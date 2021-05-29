@@ -1,0 +1,38 @@
+.player-container {
+    width: 600px;
+    border: 1px solid red;
+    margin-left: 22rem;
+    margin-top: 3rem;
+    background: antiquewhite;
+}
+
+.player-label {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 100;
+    padding-right: .5rem;
+
+}
+
+.start-button {
+    border-radius: 10px;
+    margin: .5rem;
+    color: white;
+    background-color: green;
+}
+
+button.disabled{
+    pointer-events: none;
+    border-radius: 10px;
+    margin: .5rem;
+    color: black;
+    background-color: #ccc;
+}
+
+.display-name {
+    float: left;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+    margin-left:10px;
+    margin-top: 10px;
+    margin-right: 10rem;
+}

@@ -1,0 +1,9 @@
+.token {
+    opacity: .5;
+    position: absolute;
+    width: 60%;
+    height: 60%;
+    left: 15rem;
+    top: 13rem;
+    z-index: 1
+}
