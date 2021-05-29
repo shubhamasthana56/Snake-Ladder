@@ -1,30 +1,34 @@
-import React, { useRef, useEffect, useState} from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import './game-token.css';
 import { cordinates } from '../board/boardGrids';
+import Modal from '../modal/modal';
+import {renderModalResult} from './modal-content';
 let ctx;
 const Token = (props) => {
-    
-    const [cordinateState, setCordinateState] = useState(0)
-    let currentX= 0;
+
+    const [cordinateState, setCordinateState] = useState(0);
+    const [isCompleted, setCompleted] = useState(false);
+    const [steps, setSteps] = useState(0)
+    let currentX = 0;
     let currentY = 900;
 
-    const clearToken = (dieNumber)=> {
+    const clearToken = (dieNumber) => {
         const dieValue = getDieValue(dieNumber)
-        if(dieNumber) {
+        if (dieNumber) {
             const { xAxis, yAxis } = cordinates[dieValue]
-            ctx.clearRect(xAxis, yAxis, 50, 50);
+            ctx.clearRect(xAxis, yAxis, 100, 100);
         }
-        
+
     }
-    
+
     const moveToken = (dieNumber) => {
         const dieValue = getDieValue(dieNumber)
         const { xAxis, yAxis } = cordinates[dieValue]
-        ctx.clearRect(currentX, currentY, 50, 50);
+        ctx.clearRect(currentX, currentY, 100, 100);
         currentX = xAxis;
         currentY = yAxis;
-        
-        ctx.fillRect(currentX, currentY, 50, 50)
+        ctx.fillRect(currentX, currentY, 100, 100);
+        ctx.fillStyle = "blue";
     }
     const getDieValue = (dieNumber) => {
         switch (dieNumber) {
@@ -55,20 +59,39 @@ const Token = (props) => {
     }
     const tokenRef = useRef(null)
     useEffect(() => {
+        if(cordinateState === 100) {
+            setCompleted(true);
+            setTimeout(()=> {
+                setCompleted(false);
+                ctx.fillRect(currentX, currentY, 100, 100);
+            },3000)
+        }
         ctx = tokenRef.current.getContext("2d")
-        ctx.fillRect(currentX, currentY, 50, 50)
-        if(cordinateState)
-        moveToken(cordinateState)
+        ctx.fillRect(0, 900, 100, 100)
+        if (cordinateState)
+            moveToken(cordinateState)
     }, [cordinateState]);
 
-    useEffect(()=> {
-        console.log(cordinateState, parseInt(props.dieState.dieValue))
-        clearToken(cordinateState);
-        setCordinateState( cordinateState + parseInt(props.dieState.dieValue))
+    useEffect(() => {
+        setSteps(()=> {
+            return steps + 1
+        })
+        if( cordinateState + parseInt(props.dieState.dieValue) > 100) {
+            setCordinateState(cordinateState);
+        } else {
+            clearToken(cordinateState);
+            setCordinateState(cordinateState + parseInt(props.dieState.dieValue));
+        }
+        
     }, [props.dieState])
 
     return <div>
         <canvas ref={tokenRef} height="1100" width="1100" className="token"></canvas>
+        {
+            <Modal isOpen={isCompleted}>
+                {renderModalResult(steps -1)}
+            </Modal>
+        }
     </div>
 }
 export default Token;
