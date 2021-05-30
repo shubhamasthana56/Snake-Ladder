@@ -10,7 +10,7 @@ const GameBoard = (props) => {
         <Fragment>
             {startState.gameState &&
                 <div>
-                    <Token dieState={props.currentState}></Token>
+                    <Token dieState={props.currentState} gameHandler={props.gameHandler}></Token>
                     <BoardLayout></BoardLayout>
                 </div>
             }

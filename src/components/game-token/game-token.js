@@ -3,6 +3,7 @@ import './game-token.css';
 import { cordinates } from '../board/boardGrids';
 import Modal from '../modal/modal';
 import {renderModalResult} from './modal-content';
+import boardConstants from '../board/boardConstants';
 let ctx;
 const Token = (props) => {
 
@@ -59,23 +60,24 @@ const Token = (props) => {
     }
     const tokenRef = useRef(null)
     useEffect(() => {
-        if(cordinateState === 100) {
-            setCompleted(true);
-            setTimeout(()=> {
-                setCompleted(false);
-                ctx.fillRect(currentX, currentY, 100, 100);
-            },3000)
-        }
         ctx = tokenRef.current.getContext("2d")
         ctx.fillRect(0, 900, 100, 100)
         if (cordinateState)
-            moveToken(cordinateState)
+        moveToken(cordinateState)
+        if(cordinateState === 100) {
+            setCompleted(true);
+            setTimeout(()=> {
+                boardConstants.columnNumber = 100;
+                props.gameHandler(false);
+            },3000)
+        }
+
     }, [cordinateState]);
 
     useEffect(() => {
         setSteps(()=> {
             return steps + 1
-        })
+        });
         if( cordinateState + parseInt(props.dieState.dieValue) > 100) {
             setCordinateState(cordinateState);
         } else {

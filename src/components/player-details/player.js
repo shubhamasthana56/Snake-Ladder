@@ -1,7 +1,7 @@
-import React, { useState, useContext} from 'react';
+import React, { useState, useContext } from 'react';
 import './player.css'
 import Dice from '../dice/dice';
-import {GameStateContext} from '../../context/context';
+import { GameStateContext } from '../../context/context';
 const PlayerDetails = (props) => {
     const startGame = useContext(GameStateContext);
     const [playerName, setPlayerName] = useState('');
@@ -15,7 +15,7 @@ const PlayerDetails = (props) => {
                     <label className="player-label">Enter Player Name</label>
                     <input onChange={setNameHandler} type="text">
                     </input>
-                    <button onClick={props.gameHandler} className={`${playerName.length > 0 ? "start-button" : 'disabled'}`}>Start Game</button>
+                    <button onClick={() => { props.gameHandler(true); props.dieStateHandler(0) }} className={`${playerName.length > 0 ? "start-button" : 'disabled'}`}>Start Game</button>
                 </div>
             }
             {

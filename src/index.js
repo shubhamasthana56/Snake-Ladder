@@ -13,17 +13,17 @@ const App = () => {
             return {dieValue: dieNumber}
         })
     }
-    const startGameHandler = () => {
+    const startGameHandler = (newState) => {
         setGameState(() => {
             return {
-                gameState: true
+                gameState: newState
             }
         })
     }
     return (
         <GameStateContext.Provider value={gameState}>
             <Wrapper>
-                <GameBoard currentState={dieState}></GameBoard>
+                <GameBoard currentState={dieState} gameHandler={startGameHandler}></GameBoard>
                 <PlayerDetails dieStateHandler={dieStateHandler} gameHandler={startGameHandler}></PlayerDetails>
             </Wrapper>
         </GameStateContext.Provider>

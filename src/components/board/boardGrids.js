@@ -1,9 +1,7 @@
 import boardConstants from './boardConstants';
 export const cordinates = {};
-export const cordinate1 = "Hello";
 export const createBoard = (ctx) => {
     let yaxis = boardConstants.initialYAxis;
-
     for (let i = 1; i <= 10; i++) {
         let isLeftToRight = true
         if (i % 2 == 0) {
