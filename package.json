@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --open --hot --mode development",
     "serve": "webpack serve --config ./src/webpack-dev.config.js --progress"
   },
   "author": "shubham asthana",
