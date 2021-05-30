@@ -8,10 +8,10 @@ const Wrapper = (props) => {
             <div className="container">
                 <div>
                     <div>
-                        <img src="src/assests/snl.png"></img>
+                        <img src="assests/snl.png"></img>
                     </div>
                     {!startGameContext.gameState &&
-                        <img className="datamotive-img" src="src/assests/datamotive.png"></img>
+                        <img className="datamotive-img" src="assests/datamotive.png"></img>
                     }
 
                 </div>
